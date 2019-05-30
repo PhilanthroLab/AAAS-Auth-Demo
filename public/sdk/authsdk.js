@@ -5,7 +5,7 @@
         var top = (screen.height - height) / 4;
         const authWindow = window.open(
             url,
-            'Payment Page',
+            'Auth Page',
             `width=${width}` +
             `, height=${height}` +
             `, top=${top}` +
@@ -21,7 +21,7 @@
 	const init = function (isbn, redirectUrl) {
 
 		const config = {
-			authOrigin: 'http://localhost:8000',
+			authOrigin: window.location.origin, // to be replaced with the final auth origin
 			authPath: '',
 			isbn: isbn,
 			redirectUrl: redirectUrl

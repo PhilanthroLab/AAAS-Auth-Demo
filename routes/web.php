@@ -11,6 +11,15 @@
 |
 */
 
+// demo routes
+Route::get('/demo', function () {
+    return view('demo.index');
+});
+
+Route::get('/pricing', function () {
+    return view('demo.pricing');
+});
+
 Route::prefix('internal-api')->group(function () {
 
     Route::any('login', 'AuthProcess@login');
