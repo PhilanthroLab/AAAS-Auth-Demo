@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Lindelius\JWT\StandardJWT;
 use Response;
 use Validator;
 
@@ -13,7 +14,6 @@ class AuthProcess extends Controller
     {
         $this->client = new Client([
             'headers' => [
-                'Origin' => 'localhost',
                 'Content-Type' => 'application/json;charset=utf-8',
             ],
             'verify' => false
@@ -116,8 +116,8 @@ class AuthProcess extends Controller
     public function proceed(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'is_author' => 'bail|required|string',
-            'selected_author' => 'bail|required|string',
+            'is_author' => 'bail|required|boolean',
+            'selected_author' => 'bail|string|nullable',
         ]);
 
         if ($validator->fails()) {
@@ -131,12 +131,12 @@ class AuthProcess extends Controller
         $email = session('email');
 
         // JWT encode the data to be sent back to Lumina
-        $jwt = new \Lindelius\JWT\StandardJWT();
+        $jwt = new StandardJWT();
         $jwt->exp = time() + (60 * 60); // Expire after 60 minutes
         $jwt->iat = time();
         $jwt->isbn = $isbn;
         $jwt->user_email =  $email;
-        $jwt->is_author = $isAuthor == 'true' ? true : false;
+        $jwt->is_author = $isAuthor;
         $jwt->author = $author;
 
         $accessToken = $jwt->encode('secret'); // to be replaced with a shared signing secret

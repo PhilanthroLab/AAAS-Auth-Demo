@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <div class="logo">
-            <img src="img/logo_small.png">
+            <img src="/img/logo_small.png">
         </div>
         <div class="article">
             <div class="question">
@@ -18,7 +18,7 @@
                         <select v-model="selectedAuthor" required>
                             <option value="" disabled>— Select —</option>
                             <option v-for="author in authors" :value="author">{{author}}</option>
-                            <option>Someone not listed here</option>
+                            <option value="not listed">Someone not listed here</option>
                         </select>
                     </div>
                     <div class="form-footer">
@@ -58,7 +58,7 @@
             },
             proceed () {
                 let data = {
-                    is_author: this.$route.query.isAuthor,
+                    is_author: true,
                     selected_author: this.selectedAuthor,
                 }
                 this.isLoading = true

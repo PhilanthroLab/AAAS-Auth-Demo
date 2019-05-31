@@ -12,6 +12,10 @@
 */
 
 // demo routes
+Route::get('/', function () {
+    return view('demo.index');
+});
+
 Route::get('/demo', function () {
     return view('demo.index');
 });
@@ -31,4 +35,4 @@ Route::prefix('internal-api')->group(function () {
     Route::any('proceed', 'AuthProcess@proceed');
 });
 
-Route::get('/{any?}', 'AuthProcess@index');
+Route::get('/api/{any?}', 'AuthProcess@index');

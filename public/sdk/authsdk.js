@@ -22,7 +22,7 @@
 
 		const config = {
 			authOrigin: window.location.origin, // to be replaced with the final auth origin
-			authPath: '',
+			authPath: '/api',
 			isbn: isbn,
 			redirectUrl: redirectUrl
 		}
