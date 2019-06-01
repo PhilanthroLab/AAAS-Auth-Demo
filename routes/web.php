@@ -12,6 +12,7 @@
 */
 
 // demo routes
+
 Route::get('/demo', function () {
     return view('demo.index');
 });
