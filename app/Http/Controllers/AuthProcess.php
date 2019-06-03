@@ -43,19 +43,31 @@ class AuthProcess extends Controller
 
         // verify login credentials
         // to be replaced with an API call to AAAS
+        $apiEndpoint = 'https://api.swys.io/api/v1/user/login';
+        $requestBody = [
+            'email' => $email,
+            'password' => $password
+        ];
+
         try {
-            $res = $this->client->request('POST', 'https://api.swys.io/api/v1/user/login', [
-                'json' => [
-                    'email' => $email,
-                    'password' => $password
-                ]
-            ]);
+            $res = $this->client->request('POST', $apiEndpoint, ['json' => $requestBody]);
             $body = json_decode($res->getBody(), true);
+
+            // inspect the response body
+            // if authentication is successful, store the user's email in the session
+            // modify the condition to comply with AAAS success response
             $status = $body['status'] ?? null;
             if ($status === 'success') {
                 session()->put('email', $email);
             }
-            return Response::json($body);
+
+            // status should either be success or error
+            // if status is error, message should contain the error message
+            $response = [
+                'status' => $body['status'],
+                'message' => $body['message']
+            ];
+            return Response::json($response);
         } catch (\Exception $e) {
             return Response::json(['status' => 'error', 'message' => 'unable to reach AAAS, try again later']);
         }
@@ -106,6 +118,7 @@ class AuthProcess extends Controller
         $isbn = session('isbn');
         // returns dummy data
         // to be replaced with an API call to the appropriate endpoint for getting the authors of an article by ISBN
+        // $authors variable should be an array of the author full names
         $authors = ['Samuel Smith', 'Bob Baker', 'Janet Jackson'];
         return Response::json([
             'status' => 'success',
@@ -139,7 +152,7 @@ class AuthProcess extends Controller
         $jwt->is_author = $isAuthor;
         $jwt->author = $author;
 
-        $accessToken = $jwt->encode('secret'); // to be replaced with a shared signing secret
+        $accessToken = $jwt->encode(config('app.jwt_secret')); // JWT secret should be set in the .env file
         return Response::json([
             'status' => 'success',
             'data' => $accessToken
