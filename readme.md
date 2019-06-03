@@ -4,6 +4,7 @@ AAAS JavaScript Authentication SDK
 ## Installation
 
 run ```composer Install```.
+
 Make the following folders writeable
 	```bootstrap```
 	```storage```
