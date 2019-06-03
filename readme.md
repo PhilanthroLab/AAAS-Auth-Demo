@@ -1,6 +1,16 @@
 AAAS JavaScript Authentication SDK
 ============================
 
+## Installation
+
+run ```composer Install```.
+Make the following folders writeable
+	```bootstrap```
+	```storage```
+
+setup an nginx or apache server to the ```public``` folder
+
+
 ## Usage
 The JS SDK can be found in the ```public/sdk``` folder.
 
