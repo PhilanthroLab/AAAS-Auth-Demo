@@ -3,7 +3,9 @@ AAAS JavaScript Authentication SDK
 
 ## Installation
 
-run ```composer install```.
+This is a laravel php project.
+
+run ```composer install``` to install some dependencies.
 
 Make the following folders writeable
 	```bootstrap```
