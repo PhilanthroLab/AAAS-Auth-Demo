@@ -1,6 +1,9 @@
 (function () {
 
-	const openPopup = function(url, width, height) {
+    // to be replaced with the origin of the hosted backend. example: https://auth.aaas.com
+    const BACKEND_ORIGIN = window.location.origin
+
+    const openPopup = function(url, width, height) {
         var left = (screen.width - width) / 2;
         var top = (screen.height - height) / 4;
         const authWindow = window.open(
@@ -18,44 +21,44 @@
         return authWindow
     }
 
-	const init = function (isbn, redirectUrl) {
+    const init = function (isbn, redirectUrl) {
 
-		const config = {
-			authOrigin: window.location.origin, // to be replaced with the final auth origin
-			authPath: '/api',
-			isbn: isbn,
-			redirectUrl: redirectUrl
-		}
+        const config = {
+            authOrigin: BACKEND_ORIGIN,
+            authPath: '/api',
+            isbn: isbn,
+            redirectUrl: redirectUrl
+        }
 
-		const interval = 1000
+        const interval = 1000
         const popupWidth = 640
         const popupHeight = 640
 
-		function authorize () {
-			let url = 
-				config.authOrigin +
-				config.authPath +
-				'?isbn=' +
-				config.isbn
+        function authorize () {
+            let url =
+                config.authOrigin +
+                config.authPath +
+                '?isbn=' +
+                config.isbn
 
-			let authWindow = openPopup(url, popupWidth, popupHeight)
+            let authWindow = openPopup(url, popupWidth, popupHeight)
 
-			window.addEventListener('message', messageHandler, false)
-    
+            window.addEventListener('message', messageHandler, false)
+
             function messageHandler(event) {
                 if (event.origin != config.authOrigin) {
                     return
                 }
                 clearInterval(timer)
-            	window.removeEventListener('message', messageHandler, false)
-            	authWindow.close()
+                window.removeEventListener('message', messageHandler, false)
+                authWindow.close()
                 if (event.data.status === 'success') {
-                    window.location = config.redirectUrl + '?data=' + event.data.jwt 
+                    window.location = config.redirectUrl + '?data=' + event.data.jwt
                 } else {
                     return
                 }
             }
-    
+
             let timer = setInterval(function() {
                 if (authWindow.closed) {
                     clearInterval(timer)
@@ -63,29 +66,29 @@
                     return
                 }
             }, interval)
-		}
+        }
 
-		function attachClickHandler(element) {
-			
-	        element.addEventListener('click', clickHandler, false)
-	        function clickHandler(e) {
-	        	e.preventDefault()
-	            authorize()
-	        }
-	    }
+        function attachClickHandler(element) {
 
-	    return {
-	        attachClickHandler: attachClickHandler
-	    }
-	}
+            element.addEventListener('click', clickHandler, false)
+            function clickHandler(e) {
+                e.preventDefault()
+                authorize()
+            }
+        }
 
-	const setupLinks = function (redirectUrl) {
-		links = document.querySelectorAll('[data-aaas]')
-		links.forEach(function (element) {
-			let ISBN = element.dataset.isbn
-			init(ISBN, redirectUrl).attachClickHandler(element)
-		})
-	}
+        return {
+            attachClickHandler: attachClickHandler
+        }
+    }
 
-	window.AuthSDK = { setupLinks }
+    const setupLinks = function (redirectUrl) {
+        links = document.querySelectorAll('[data-aaas]')
+        links.forEach(function (element) {
+            let ISBN = element.dataset.isbn
+            init(ISBN, redirectUrl).attachClickHandler(element)
+        })
+    }
+
+    window.AuthSDK = { setupLinks }
 })()
