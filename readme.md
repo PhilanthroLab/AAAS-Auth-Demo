@@ -17,15 +17,15 @@ setup an nginx or apache server to the ```public``` folder
 
 When a user is a member
 
-/user_member
+```/user_member```
 
 When a user is not a member
 
-/user_not_member
+```/user_not_member```
 
 When a user is an author
 
-/user_author
+```/user_author```
 
 
 ## Usage
