@@ -16,8 +16,16 @@ Route::get('/', function () {
     return view('demo.index');
 });
 
-Route::get('/demo', function () {
-    return view('demo.index');
+Route::get('/user_member', function () {
+    return view('demo.indexUserMember');
+});
+
+Route::get('/user_not_member', function () {
+    return view('demo.indexUserNotMember');
+});
+
+Route::get('/user_author', function () {
+    return view('demo.indexUserAuthor');
 });
 
 Route::get('/pricing', function () {
