@@ -1891,7 +1891,6 @@ __webpack_require__.r(__webpack_exports__);
           if (window.opener) {
             window.opener.postMessage({
               'status': 'success',
-              'case': 'member',
               'jwt': jwt
             }, '*');
           }

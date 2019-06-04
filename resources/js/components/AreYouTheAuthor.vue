@@ -43,7 +43,7 @@
                         if (res.data.status === 'success') {
                             let jwt = res.data.data
                             if (window.opener) {
-                                window.opener.postMessage({'status': 'success', 'case': 'member', 'jwt': jwt}, '*')
+                                window.opener.postMessage({'status': 'success', 'jwt': jwt}, '*')
                             }
                         }
                     })
