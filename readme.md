@@ -1,6 +1,33 @@
 AAAS JavaScript Authentication SDK
 ============================
 
+## Installation
+
+This is a laravel php project.
+
+run ```composer install``` to install some dependencies.
+
+Make the following folders writeable
+	```bootstrap```
+	```storage```
+
+setup an nginx or apache server to the ```public``` folder
+
+## Use Cases
+
+When a user is a member
+
+```/user_member```
+
+When a user is not a member
+
+```/user_not_member```
+
+When a user is an author
+
+```/user_author```
+
+
 ## Usage
 The JS SDK can be found in the ```public/sdk``` folder.
 

@@ -15,7 +15,7 @@
                     <router-link to="login">YES</router-link>
                 </div>
                 <div class="disabled">
-                    <router-link to="register">NO</router-link>
+                    <router-link to="access-granted">NO</router-link>
                 </div>
             </div>
         </div>
