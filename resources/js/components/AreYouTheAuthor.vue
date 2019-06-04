@@ -4,11 +4,11 @@
             <img src="/img/logo_small.png">
         </div>
         <div class="article">
+<!--            <div class="question">-->
+<!--                <p class="paragraph">User Account Verified!</p>-->
+<!--            </div>-->
             <div class="question">
-                <p class="paragraph">User Account Verified!</p>
-            </div>
-            <div class="question">
-                <h1>Are you the author of the <span class="italic">AAAS</span> content?</h1>
+                <h1>Are you an author of the review<span class="italic"></span>?</h1>
             </div>
             <div class="answers">
                 <div>
@@ -43,7 +43,7 @@
                         if (res.data.status === 'success') {
                             let jwt = res.data.data
                             if (window.opener) {
-                                window.opener.postMessage({'status': 'success', 'jwt': jwt}, '*')
+                                window.opener.postMessage({'status': 'success', 'case': 'member', 'jwt': jwt}, '*')
                             }
                         }
                     })
