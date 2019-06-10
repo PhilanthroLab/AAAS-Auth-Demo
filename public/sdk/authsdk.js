@@ -53,7 +53,8 @@
                 window.removeEventListener('message', messageHandler, false)
                 authWindow.close()
                 if (event.data.status === 'success') {
-                    //window.location = config.redirectUrl + '?data=' + event.data.jwt
+                    // let sep = config.redirectUrl.includes('?') ? '&' : '?'
+                    // window.location = config.redirectUrl + sep + 'data=' + event.data.jwt
                     window.location = config.redirectUrl
                 } else {
                     return

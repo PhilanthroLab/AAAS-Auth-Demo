@@ -56,7 +56,7 @@
                 axios.post('/internal-api/login', data)
                     .then(res => {
                         if (res.data.status === 'success') {
-                            this.$router.push('/access-granted')
+                            this.$router.push(`/access-granted`)
                         } else {
                             this.message = res.data.message
                         }

@@ -10,17 +10,16 @@
 <body>
 <div class="main">
     <div class="logo">
-        <img src="/img/logo.png">
+        <img src="/img/logo_small.png">
+    </div>
+    <div class="demo-image">
+        <img data-aaas data-isbn="2479-2478923-2479724" src="/img/demo_image.jpg" alt="">
     </div>
     <div class="article">
-        <h2 class="title">ARTICLE TOOLS</h2>
         <ul class="tools">
             <li data-aaas data-isbn="2479-2478923-2479724">
                 <a href="">Request Permission</a>
             </li>
-            <li><a href="">Email</a></li>
-            <li><a href="">Print</a></li>
-            <li><a href="">Share</a></li>
         </ul>
     </div>
 </div>

@@ -67,7 +67,7 @@ h2.title {
 }
 
 ul.tools {
-	margin: 0;
+	margin-top: 20px;
 	padding: 0;
 }
 
@@ -250,4 +250,16 @@ select {
 
 div.info {
 	margin-bottom: 19px;
+}
+
+div.demo-image {
+	display: flex;
+	justify-content: center;
+	margin-top: 25px;
+	cursor: pointer;
+}
+
+div.demo-image > img {
+	width: auto;
+	height: 400px;
 }

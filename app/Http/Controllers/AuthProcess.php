@@ -59,6 +59,7 @@ class AuthProcess extends Controller
             $status = $body['status'] ?? null;
             if ($status === 'success') {
                 session()->put('email', $email);
+                session()->put('is_member', true);
             }
 
             // status should either be success or error
@@ -142,17 +143,22 @@ class AuthProcess extends Controller
 
         $isbn = session('isbn');
         $email = session('email');
+        $isMember = session('is_member', false);
 
         // JWT encode the data to be sent back to Lumina
         $jwt = new StandardJWT();
         $jwt->exp = time() + (60 * 60); // Expire after 60 minutes
         $jwt->iat = time();
         $jwt->isbn = $isbn;
-        $jwt->user_email =  $email;
+        $jwt->is_member = $isMember;
+        $jwt->member_email =  $email;
         $jwt->is_author = $isAuthor;
         $jwt->author = $author;
 
         $accessToken = $jwt->encode(config('app.jwt_secret')); // JWT secret should be set in the .env file
+
+        session()->flush();
+
         return Response::json([
             'status' => 'success',
             'data' => $accessToken

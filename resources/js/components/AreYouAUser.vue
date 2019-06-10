@@ -24,7 +24,8 @@
 
 <script>
     export default {
-        name: "AreYouAUser.vue"
+        name: "AreYouAUser.vue",
+        methods: {}
     }
 </script>
 
