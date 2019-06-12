@@ -120,7 +120,11 @@ class AuthProcess extends Controller
         // returns dummy data
         // to be replaced with an API call to the appropriate endpoint for getting the authors of an article by ISBN
         // $authors variable should be an array of the author full names
-        $authors = ['Samuel Smith', 'Bob Baker', 'Janet Jackson'];
+        $authors = [
+            'Junyi Wang', 'Feng Lin', 'Zhengpeng Wan', 'Xiaolin Sun', 'Yun Lu',
+            'Jianyong Huang', 'Fei Wang', 'Yingyue Zeng', 'Ying-Hua Chen',
+            'Yan Shi', 'Wenjie Zheng', 'Zhanguo Li', 'Chunyang Xiong', 'Wanli Liu'
+        ];
         return Response::json([
             'status' => 'success',
             'data' => $authors
